@@ -1,0 +1,62 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "login": "admin",
+      "senha": "123456",
+      "email": "admin@crm.com",
+      "ativo": true,
+      "dataCriacao": "2026-05-18T01:36:43.803Z",
+      "ultimoAcesso": "2026-05-18T01:53:02.345Z"
+    }
+  ],
+  "produtos": [
+    {
+      "id": "122b354a-ec04-47b0-980e-7e057dcc6e5d",
+      "nome": "Notebook Dell",
+      "descricao": "Notebook Dell Inspiron 15, Intel i7, 16GB RAM, 512GB SSD",
+      "valor": 2999.99,
+      "categoria": "Geral",
+      "estoque": 15,
+      "dataCriacao": "2026-05-18T01:39:15.011Z",
+      "dataAtualizacao": "2026-05-18T01:39:15.011Z"
+    }
+  ],
+  "atividades": [
+    {
+      "id": "c88407e5-427f-48ee-9416-aa44409aaefa",
+      "usuario": "admin",
+      "acao": "LOGIN",
+      "detalhes": "Usuário fez login",
+      "data": "2026-05-18T01:38:12.102Z"
+    },
+    {
+      "id": "05951097-19f7-4d8c-8dc0-4e382c7e807b",
+      "usuario": "admin",
+      "acao": "LOGIN",
+      "detalhes": "Usuário fez login",
+      "data": "2026-05-18T01:39:02.397Z"
+    },
+    {
+      "id": "27f8cd84-6733-4119-af01-995a1ee003fa",
+      "usuario": "admin",
+      "acao": "CRIAR_PRODUTO",
+      "detalhes": "Novo produto criado: Notebook Dell",
+      "data": "2026-05-18T01:39:15.011Z"
+    },
+    {
+      "id": "eb7e22ee-0df9-40fb-894a-e886009196c3",
+      "usuario": "admin",
+      "acao": "LOGIN",
+      "detalhes": "Usuário fez login",
+      "data": "2026-05-18T01:41:43.730Z"
+    },
+    {
+      "id": "8b155bf7-6807-4807-be2d-5b10ff206e21",
+      "usuario": "admin",
+      "acao": "LOGIN",
+      "detalhes": "Usuário fez login",
+      "data": "2026-05-18T01:53:02.345Z"
+    }
+  ]
+}

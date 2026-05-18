@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Sistema de Gerenciamento</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Sistema de Notificações -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <div id="login-container" class="login-container">
+        <div class="login-box">
+            <h1>CRM</h1>
+            <h2>Sistema de Gerenciamento</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login">Login:</label>
+                    <input type="text" id="login" name="login" required placeholder="Digite seu login">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+                </div>
+                <button type="submit" class="btn-login">Entrar</button>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+            </form>
+            <p class="demo-info">Credenciais de demonstração: <br><strong>Login:</strong> admin | <strong>Senha:</strong> 123456</p>
+        </div>
+    </div>
+
+    <div id="app-container" class="app-container" style="display: none;">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-brand">CRM - Sistema de Gerenciamento</div>
+            <div class="navbar-user">
+                <span id="usuario-nome">Usuário</span>
+                <button id="btn-logout" class="btn-logout">🚪 Sair</button>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="#" class="menu-item active" data-page="dashboard">🏠 Início</a></li>
+                <li><a href="#" class="menu-item" data-page="produtos">📦 Produtos</a></li>
+                <li><a href="#" class="menu-item" data-page="usuarios">👥 Usuários</a></li>
+                <li><a href="#" class="menu-item" data-page="relatorios">📊 Relatórios</a></li>
+                <li><a href="#" class="menu-item" data-page="backup">💾 Backup</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="page-content active">
+                <h1>Bem-vindo ao CRM!</h1>
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Total de Produtos</h3>
+                        <p id="card-total-produtos" class="card-value">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total em Estoque</h3>
+                        <p id="card-estoque-total" class="card-value">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Produtos com Estoque</h3>
+                        <p id="card-produtos-estoque" class="card-value">0</p>
+                    </div>
+                    <div class="card">
+                        <h3>Valor Total</h3>
+                        <p id="card-valor-total" class="card-value">R$ 0,00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Usuários Ativos</h3>
+                        <p id="card-usuarios-ativos" class="card-value">0/0</p>
+                    </div>
+                </div>
+
+                <div class="relatorio-atividades">
+                    <h3>Atividades Recentes</h3>
+                    <div id="atividades-relatorio" class="atividades-list">
+                        <p>Carregando atividades...</p>
+                    </div>
+                </div>
+
+                <div class="roadmap-container">
+                    <h3>🚀 Atualizações Futuras</h3>
+                    <div class="roadmap-list">
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">👥</span>
+                            <div class="roadmap-content">
+                                <strong>Separação de Cargo/Permissões</strong>
+                                <p>Sistema de roles (Admin, Gerente, Vendedor) com controle granular de acesso</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📊</span>
+                            <div class="roadmap-content">
+                                <strong>Melhorias nos Relatórios</strong>
+                                <p>Filtros avançados, gráficos customizáveis, exportação em PDF e Excel</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📥</span>
+                            <div class="roadmap-content">
+                                <strong>Importação de Arquivos</strong>
+                                <p>Importar propostas e dados via CSV, Excel e outros formatos</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">👨‍💼</span>
+                            <div class="roadmap-content">
+                                <strong>Gestão de Clientes</strong>
+                                <p>Cadastro completo de clientes com histórico de transações e contatos</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📦</span>
+                            <div class="roadmap-content">
+                                <strong>Catálogo de Produtos</strong>
+                                <p>Criar e gerenciar tipos de produtos, preços e categorias</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">🔐</span>
+                            <div class="roadmap-content">
+                                <strong>Autenticação JWT</strong>
+                                <p>Melhor segurança com tokens JWT e renovação automática</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">💾</span>
+                            <div class="roadmap-content">
+                                <strong>Backup Automático</strong>
+                                <p>Backup diário na nuvem e recuperação de dados</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📧</span>
+                            <div class="roadmap-content">
+                                <strong>Notificações por Email</strong>
+                                <p>Alertas automáticos para propostas vencidas, novas atividades e relatórios</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📱</span>
+                            <div class="roadmap-content">
+                                <strong>App Mobile</strong>
+                                <p>Aplicativo nativo para iOS e Android com funcionalidades offline</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">🌙</span>
+                            <div class="roadmap-content">
+                                <strong>Modo Escuro</strong>
+                                <p>Interface com tema escuro e customização de cores</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">🔗</span>
+                            <div class="roadmap-content">
+                                <strong>Integrações Externas</strong>
+                                <p>API para integração com WhatsApp, Slack, Google Drive e outros serviços</p>
+                            </div>
+                        </div>
+                        <div class="roadmap-item status-planejado">
+                            <span class="roadmap-icon">📈</span>
+                            <div class="roadmap-content">
+                                <strong>Analytics Avançado</strong>
+                                <p>Dashboard analítico com previsões, tendências e KPIs customizáveis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produtos -->
+            <div id="produtos" class="page-content">
+                <div class="page-header">
+                    <h1>Cadastro de Produtos</h1>
+                    <button id="btn-novo-produto" class="btn-primary">+ Novo Produto</button>
+                </div>
+
+                <div class="filtros">
+                    <input type="text" id="filtro-produtos" placeholder="🔍 Buscar por nome..." class="filtro-input">
+                    <select id="filtro-categoria" class="filtro-select">
+                        <option value="">Todas as Categorias</option>
+                        <option value="Geral">Geral</option>
+                        <option value="Eletrônicos">Eletrônicos</option>
+                        <option value="Alimentos">Alimentos</option>
+                        <option value="Serviços">Serviços</option>
+                    </select>
+                    <select id="filtro-ordenar-produtos" class="filtro-select">
+                        <option value="">Ordenar por</option>
+                        <option value="data-desc">Mais Recente</option>
+                        <option value="valor-desc">Maior Valor</option>
+                        <option value="valor-asc">Menor Valor</option>
+                    </select>
+                </div>
+
+                <!-- Modal Novo Produto -->
+                <div id="modal-produto" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2 id="modal-produto-titulo">Novo Produto</h2>
+                        <form id="form-produto">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Nome:</label>
+                                    <input type="text" id="nome-produto" required placeholder="Nome do produto">
+                                </div>
+                                <div class="form-group">
+                                    <label>Categoria:</label>
+                                    <select id="categoria-produto" required>
+                                        <option value="Geral">Geral</option>
+                                        <option value="Eletrônicos">Eletrônicos</option>
+                                        <option value="Alimentos">Alimentos</option>
+                                        <option value="Serviços">Serviços</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição:</label>
+                                <textarea id="descricao-produto" required placeholder="Digite a descrição"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Valor:</label>
+                                    <input type="number" id="valor-produto" required step="0.01" placeholder="0.00">
+                                </div>
+                                <div class="form-group">
+                                    <label>Estoque:</label>
+                                    <input type="number" id="estoque-produto" required step="1" value="0" placeholder="0">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Salvar Produto</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="produtos-list" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Estoque</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-produtos">
+                            <tr><td colspan="7" class="empty">Nenhum produto cadastrado</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Usuários -->
+            <div id="usuarios" class="page-content">
+                <div class="page-header">
+                    <h1>Gerenciar Usuários</h1>
+                    <button id="btn-novo-usuario" class="btn-primary">+ Novo Usuário</button>
+                </div>
+
+                <div class="usuarios-stats">
+                    <div class="stat-card">
+                        <label>Total de Usuários:</label>
+                        <span id="stat-total-usuarios">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <label>Usuários Ativos:</label>
+                        <span id="stat-usuarios-ativos">0</span>
+                    </div>
+                </div>
+
+                <!-- Modal Novo Usuário -->
+                <div id="modal-usuario" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close-modal">&times;</span>
+                        <h2 id="modal-usuario-titulo">Novo Usuário</h2>
+                        <form id="form-usuario">
+                            <div class="form-group">
+                                <label>Login:</label>
+                                <input type="text" id="login-usuario" required placeholder="Mínimo 3 caracteres">
+                                <small class="form-help">Deve ter no mínimo 3 caracteres</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha:</label>
+                                <input type="password" id="senha-usuario" required placeholder="Mínimo 6 caracteres">
+                                <small class="form-help">Deve ter no mínimo 6 caracteres</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="email-usuario" required placeholder="Digite um email válido">
+                            </div>
+                            <button type="submit" class="btn-primary">Salvar Usuário</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="usuarios-list" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Login</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Criado em</th>
+                                <th>Último Acesso</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-usuarios">
+                            <tr><td colspan="6" class="empty">Nenhum usuário cadastrado</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Relatórios -->
+            <div id="relatorios" class="page-content">
+                <div class="page-header">
+                    <h1>Relatórios</h1>
+                    <button id="btn-exportar-relatorio" class="btn-primary">📥 Exportar Relatório</button>
+                </div>
+
+                <div class="relatorio-cards">
+                    <div class="relatorio-card">
+                        <h3>Resumo do Sistema</h3>
+                        <div id="resumo-relatorio" class="relatorio-content">
+                            <p>Carregando dados...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relatorio-propostas">
+                    <h3>Detalhes de Propostas</h3>
+                    <div id="propostas-relatorio" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th>Tipo</th>
+                                    <th>Data</th>
+                                </tr>dutos</h3>
+                    <div id="produtos-relatorio" class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                    <th>Estoque</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-relatorio-produtos">
+                                <tr><td colspan="5" class="empty">Nenhum produto para exibir</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="graficos-container">
+                    <div class="grafico-box">
+                        <h3>Produtos por Categoria</h3>
+                        <canvas id="chartCategoria" style="max-height: 300px;"></canvas>
+                    </div>
+                    <div class="grafico-box">
+                        <h3>Estoque por Categoria</h3>
+                        <canvas id="chartEstoque" style="max-height: 300px;"></canvas>
+                    </div>
+                </div>
+
+                <div class="grafico-box full">
+                    <h3>Top 10 Produtos por Valor</h3>
+                    <canvas id="chartProdutos" style="max-height: 300px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Backup -->
+            <div id="backup" class="page-content">
+                <div class="page-header">
+                    <h1>💾 Gerenciador de Backup</h1>
+                </div>
+
+                <div class="backup-container">
+                    <div class="backup-card">
+                        <h3>📥 Criar Backup</h3>
+                        <p>Faça download de todos os dados do sistema em arquivo JSON</p>
+                        <div class="backup-info">
+                            <small>✓ Inclui: Produtos, Usuários, Atividades</small><br>
+                            <small>✓ Formato: JSON compactado</small><br>
+                            <small>✓ Seguro e restaurável</small>
+                        </div>
+                        <button id="btn-fazer-backup" class="btn-primary btn-large">
+                            📥 Fazer Download do Backup
+                        </button>
+                    </div>
+
+                    <div class="backup-card">
+                        <h3>📤 Restaurar Backup</h3>
+                        <p>Restaure os dados a partir de um arquivo de backup anterior</p>
+                        <div class="backup-info">
+                            <small>⚠️ Isso substituirá todos os dados atuais</small><br>
+                            <small>✓ Selecione um arquivo .json</small><br>
+                            <small>✓ Será solicitada confirmação</small>
+                        </div>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="file-restore" accept=".json" style="display: none;">
+                            <button id="btn-selecionar-arquivo" class="btn-secondary btn-large">
+                                📂 Selecionar Arquivo
+                            </button>
+                        </div>
+                        <p id="file-name" style="margin-top: 10px; color: var(--text-light); font-size: 0.9em;"></p>
+                        <button id="btn-restaurar-backup" class="btn-danger btn-large" style="display: none; margin-top: 10px;">
+                            ⚠️ Restaurar Backup
+                        </button>
+                    </div>
+
+                    <div class="backup-card full">
+                        <h3>📋 Histórico de Backups</h3>
+                        <p>Últimos backups realizados localmente no seu navegador</p>
+                        <div id="backup-history" class="backup-history">
+                            <p style="color: var(--text-light);">Os backups são salvos automaticamente quando você cria/edita dados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
