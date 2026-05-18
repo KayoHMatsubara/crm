@@ -111,6 +111,20 @@ Acesse: **http://localhost:3000**
 
 Você verá a tela de login!
 
+## Deploy na Vercel
+
+O projeto roda na Vercel com o frontend servindo em mesma origem e o backend exposto como função serverless em `/api`.
+
+### Importante
+- A persistência em `database.json` continua funcionando localmente.
+- Na Vercel, o sistema usa memória da função, então os dados podem ser reiniciados em cold starts.
+- Se você precisar de persistência real em produção, conecte um banco externo como Neon, Supabase ou Vercel KV.
+
+### Passos
+1. Faça o deploy do repositório na Vercel.
+2. Garanta que a raiz do projeto contenha o `package.json` criado para o deploy.
+3. Acesse a aplicação em `/` e a API em `/api/...`.
+
 ## 🔐 Credenciais Padrão para Teste
 
 | Campo | Valor |

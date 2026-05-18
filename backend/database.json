@@ -7,7 +7,7 @@
       "email": "admin@crm.com",
       "ativo": true,
       "dataCriacao": "2026-05-18T01:36:43.803Z",
-      "ultimoAcesso": "2026-05-18T01:53:02.345Z"
+      "ultimoAcesso": "2026-05-18T17:17:06.785Z"
     }
   ],
   "produtos": [
@@ -20,6 +20,16 @@
       "estoque": 15,
       "dataCriacao": "2026-05-18T01:39:15.011Z",
       "dataAtualizacao": "2026-05-18T01:39:15.011Z"
+    },
+    {
+      "id": "082f25e6-9781-4fe5-81b3-82f1c6319e96",
+      "nome": "Banana",
+      "descricao": "teste de criaçao",
+      "valor": 6.99,
+      "categoria": "Alimentos",
+      "estoque": 50,
+      "dataCriacao": "2026-05-18T17:17:49.684Z",
+      "dataAtualizacao": "2026-05-18T17:17:49.684Z"
     }
   ],
   "atividades": [
@@ -57,6 +67,20 @@
       "acao": "LOGIN",
       "detalhes": "Usuário fez login",
       "data": "2026-05-18T01:53:02.345Z"
+    },
+    {
+      "id": "c1402890-4824-4082-afb7-97c95a897f61",
+      "usuario": "admin",
+      "acao": "LOGIN",
+      "detalhes": "Usuário fez login",
+      "data": "2026-05-18T17:17:06.785Z"
+    },
+    {
+      "id": "31b6e161-a288-4e4d-a5fc-6dc5f904c0dc",
+      "usuario": "admin",
+      "acao": "CRIAR_PRODUTO",
+      "detalhes": "Novo produto criado: Banana",
+      "data": "2026-05-18T17:17:49.684Z"
     }
   ]
 }

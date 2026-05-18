@@ -7,6 +7,7 @@ const fs = require('fs');
 
 const app = express();
 const PORT = 3000;
+const isVercel = !!process.env.VERCEL;
 
 // Middleware
 app.use(cors());
@@ -36,6 +37,10 @@ function carregarBancoDados() {
 }
 
 function salvarBancoDados(dados) {
+  if (isVercel) {
+    return;
+  }
+
   fs.writeFileSync(DB_PATH, JSON.stringify(dados, null, 2));
 }
 
@@ -430,6 +435,10 @@ app.post('/api/backup/restaurar', (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor CRM rodando em http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servidor CRM rodando em http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
