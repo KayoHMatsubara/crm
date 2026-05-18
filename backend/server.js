@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const databaseSeed = require('./database.json');
 
 const app = express();
 const PORT = 3000;
@@ -24,16 +25,10 @@ function carregarBancoDados() {
       return JSON.parse(dados);
     }
   } catch (error) {
-    console.log('Criando novo banco de dados...');
+    console.log('Carregando banco de dados padrão...');
   }
   
-  return {
-    usuarios: [
-      { id: '1', login: 'admin', senha: '123456', email: 'admin@crm.com', ativo: true, dataCriacao: new Date().toISOString(), ultimoAcesso: null }
-    ],
-    produtos: [],
-    atividades: []
-  };
+  return JSON.parse(JSON.stringify(databaseSeed));
 }
 
 function salvarBancoDados(dados) {
